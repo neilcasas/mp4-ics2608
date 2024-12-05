@@ -5,6 +5,11 @@
             30
         </session-timeout>
     </session-config>
+    <listener>
+        <listener-class>
+            src.classes.DateContextListener
+        </listener-class>
+    </listener>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
