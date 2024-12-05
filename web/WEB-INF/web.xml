@@ -18,6 +18,14 @@
             classes.DateContextListener
         </listener-class>
     </listener>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>cave_johnson12</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>admin123</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

@@ -63,7 +63,7 @@
           <a class="nav-link" href="#">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
-          <a href="login.jsp" class="btn btn-primary">Login</a>
+          <a href="login" class="btn btn-primary">Login</a>
         </div>
       </ul>
     </div>

@@ -6,7 +6,7 @@
     <title>Login</title>
   </head>
   <body>
-    <form action="" method="post">
+    <form action="login" method="post">
       <label for="username">Username</label>
       <input type="text" name="username" id="username" />
       <label for="password">Password</label>

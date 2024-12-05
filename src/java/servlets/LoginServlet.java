@@ -3,6 +3,8 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,24 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+           if("POST".equals(request.getMethod())) {
+               // Get credentials from form
+               String formUsername = request.getParameter("username");
+               String formPassword = request.getParameter("password");
+               
+               // Get credentials from context
+               String username = getServletContext().getInitParameter("username");
+               String password = getServletContext().getInitParameter("password");
+               
+               // Create rdPath
+               String rdPath = (formUsername.equals(username) && formPassword.equals(password)) ? "index.jsp" : "login.jsp";
+               RequestDispatcher rd = request.getRequestDispatcher(rdPath);
+               
+               rd.forward(request, response);
+           } else {
+               request.getRequestDispatcher("login.jsp").forward(request, response);
+           
+           }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
