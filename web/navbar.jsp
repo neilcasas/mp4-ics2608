@@ -57,14 +57,13 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Blue Lock</a></li>
             <li><a class="dropdown-item" href="#">Japan U-20</a></li>
-          </ul> 
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
-          <button class="btn btn-primary">Login</button>
-          <button class="btn btn-primary">Sign Up</button>
+          <a href="login.jsp" class="btn btn-primary">Login</a>
         </div>
       </ul>
     </div>
