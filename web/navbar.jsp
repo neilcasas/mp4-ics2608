@@ -20,7 +20,8 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   "
 >
   <div class="container-fluid">
@@ -44,14 +45,19 @@
           <a class="nav-link" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Players
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Blue Lock</a></li>
             <li><a class="dropdown-item" href="#">Japan U-20</a></li>
-
-          </ul>
+          </ul> 
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Tickets</a>
