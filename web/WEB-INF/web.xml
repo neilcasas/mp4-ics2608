@@ -7,7 +7,7 @@
     </session-config>
     <listener>
         <listener-class>
-            src.classes.DateContextListener
+            classes.DateContextListener
         </listener-class>
     </listener>
     <welcome-file-list>

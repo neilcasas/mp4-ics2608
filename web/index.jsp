@@ -45,11 +45,11 @@
       
    
     <!--Footer-->
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <div>
-        <% application.getAttribute("date") %>
+        <%= application.getAttribute("date") %>
     </div>
   </div>
 </nav>
