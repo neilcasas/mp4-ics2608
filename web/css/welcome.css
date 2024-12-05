@@ -1,0 +1,12 @@
+main {
+  height: 150vh;
+  background-color: gray;
+}
+
+#navbarLogo {
+  max-height: 30px;
+}
+
+.mobile-width-buttons {
+  display: none;
+}
