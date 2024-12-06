@@ -67,12 +67,12 @@
           session.getAttribute("isLoggedIn") != null && (Boolean)
           session.getAttribute("isLoggedIn") == true) { %>
           <div>Welcome back, <%= session.getAttribute("username")%>!</div>
-          <a href="" class="btn btn-danger">Logout</a>
+          <a href="logout" class="btn btn-danger">Logout</a>
           <% } else { %>
           <a href="login" class="btn btn-primary">Login</a>
 
           <% } } else { %>
-          <a href="logout" class="btn btn-primary">Login</a>
+          <a href="login" class="btn btn-primary">Login</a>
           <% } %>
         </div>
       </ul>
