@@ -25,8 +25,8 @@
   "
 >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="assets/Blue_Lock_Logo.png" id="navbarLogo" />
+    <a class="navbar-brand" href="/mp4-ics2608/">
+      <img src="/mp4-ics2608/assets/Blue_Lock_Logo.png" id="navbarLogo" style="max-height: 30px;" />
     </a>
     <button
       class="navbar-toggler"
@@ -42,7 +42,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav d-flex w-100">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link" aria-current="page" href="/mp4-ics2608/">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -60,19 +60,19 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Tickets</a>
+          <a class="nav-link" href="/mp4-ics2608/views/tickets.jsp">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
           <% if (session != null) { if ((Boolean)
           session.getAttribute("isLoggedIn") != null && (Boolean)
           session.getAttribute("isLoggedIn") == true) { %>
           <div>Welcome back, <%= session.getAttribute("username")%>!</div>
-          <a href="logout" class="btn btn-danger">Logout</a>
+          <a href="/mp4-ics2608/logout" class="btn btn-danger">Logout</a>
           <% } else { %>
-          <a href="login" class="btn btn-primary">Login</a>
+          <a href="/mp4-ics2608/login" class="btn btn-primary">Login</a>
 
           <% } } else { %>
-          <a href="login" class="btn btn-primary">Login</a>
+          <a href="/mp4-ics2608/login" class="btn btn-primary">Login</a>
           <% } %>
         </div>
       </ul>
