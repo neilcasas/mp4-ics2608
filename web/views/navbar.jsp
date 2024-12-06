@@ -26,7 +26,7 @@
 >
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="assets/Blue_Lock_Logo.png" id="navbarLogo" />
+      <img src="../assets/Blue_Lock_Logo.png" id="navbarLogo" />
     </a>
     <button
       class="navbar-toggler"

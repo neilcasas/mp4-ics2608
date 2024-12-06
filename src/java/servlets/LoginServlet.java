@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
                String password = getServletContext().getInitParameter("password");
                
                // Create rdPath
-               String rdPath = (formUsername.equals(username) && formPassword.equals(password)) ? "views/index.jsp" : "views/login.jsp";
+               String rdPath = (formUsername.equals(username) && formPassword.equals(password)) ? "views/success.jsp" : "views/login.jsp";
                RequestDispatcher rd = request.getRequestDispatcher(rdPath);
                
                // Set session attributes
