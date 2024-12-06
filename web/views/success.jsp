@@ -12,7 +12,13 @@
         <title>Success!</title>
     </head>
     <body>
+        <% if (session != null) { 
+            if ((Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn") == true) {
+        %>
         <h1>Successfully logged in as <%= session.getAttribute("username") %></h1>
+        <% } else { %>
+        <h1> Successfully logged out.</h1>
+        <%}}%>
         <a href="/mp4-ics2608">Go to home page</a>
     </body>
 </html>

@@ -35,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
         
         session.invalidate();
         
-        RequestDispatcher rd = request.getRequestDispatcher("views/login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("views/success.jsp");
         rd.forward(request, response);
         
      }
