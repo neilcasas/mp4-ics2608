@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Blue Lock: U20 Match</title>
-    <link href="../css/welcome.css" rel="stylesheet" />
+    <link href="css/welcome.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,13 +14,13 @@
     />
   </head>
   <body>
-      <jsp:include page="navbar.jsp"/>
+    <jsp:include page="navbar.jsp" />
     <!--Main Content-->
     <main>
       <h1>Main Content</h1>
     </main>
 
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="footer.jsp" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

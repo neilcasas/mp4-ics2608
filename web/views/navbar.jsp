@@ -26,7 +26,7 @@
 >
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="../assets/Blue_Lock_Logo.png" id="navbarLogo" />
+      <img src="assets/Blue_Lock_Logo.png" id="navbarLogo" />
     </a>
     <button
       class="navbar-toggler"
@@ -63,17 +63,15 @@
           <a class="nav-link" href="#">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
-            <% 
-                if (session != null)
-                {
-                    if ((Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn") == true) {
-            %>
-            <p class="d-flex justify-content-center align-items-center"> Welcome back, <%= session.getAttribute("username")%>! </p> 
-                <% } else { %>
-                <a href="login" class="btn btn-primary">Login</a>
-                
-             <% }
-           } else { %>
+          <% if (session != null) { if ((Boolean)
+          session.getAttribute("isLoggedIn") != null && (Boolean)
+          session.getAttribute("isLoggedIn") == true) { %>
+          <div>Welcome back, <%= session.getAttribute("username")%>!</div>
+          <a href="" class="btn btn-danger">Logout</a>
+          <% } else { %>
+          <a href="login" class="btn btn-primary">Login</a>
+
+          <% } } else { %>
           <a href="login" class="btn btn-primary">Login</a>
           <% } %>
         </div>

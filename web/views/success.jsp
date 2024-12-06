@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Successfully logged in as <%= session.getAttribute("username") %></h1>
-        <a href="/mp4-ics2608/views/index.jsp">Go to home page</a>
+        <a href="/mp4-ics2608">Go to home page</a>
     </body>
 </html>
