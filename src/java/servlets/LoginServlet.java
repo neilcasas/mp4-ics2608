@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
@@ -35,10 +36,14 @@ public class LoginServlet extends HttpServlet {
                String rdPath = (formUsername.equals(username) && formPassword.equals(password)) ? "index.jsp" : "login.jsp";
                RequestDispatcher rd = request.getRequestDispatcher(rdPath);
                
+               // Set session attributes
+               HttpSession session = request.getSession();
+               session.setAttribute("isLoggedIn", true);
+               session.setAttribute("username", username);
+               
                rd.forward(request, response);
            } else {
                request.getRequestDispatcher("login.jsp").forward(request, response);
-           
            }
     }
 

@@ -15,7 +15,6 @@
   </head>
   <body>
       <jsp:include page="navbar.jsp"/>
-
     <!--Main Content-->
     <main>
       <h1>Main Content</h1>

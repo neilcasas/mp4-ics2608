@@ -63,7 +63,19 @@
           <a class="nav-link" href="#">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
+            <% 
+                if (session != null)
+                {
+                    if ((Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn") == true) {
+            %>
+            <p class="d-flex justify-content-center align-items-center"> Welcome back, <%= session.getAttribute("username")%>! </p> 
+                <% } else { %>
+                <a href="login" class="btn btn-primary">Login</a>
+                
+             <% }
+           } else { %>
           <a href="login" class="btn btn-primary">Login</a>
+          <% } %>
         </div>
       </ul>
     </div>
