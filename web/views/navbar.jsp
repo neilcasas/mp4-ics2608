@@ -72,7 +72,7 @@
           <a href="login" class="btn btn-primary">Login</a>
 
           <% } } else { %>
-          <a href="login" class="btn btn-primary">Login</a>
+          <a href="logout" class="btn btn-primary">Login</a>
           <% } %>
         </div>
       </ul>
