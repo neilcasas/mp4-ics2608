@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+    response.setHeader("Pragma", "no-cache"); 
+    response.setDateHeader("Expires", 0);   
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,14 +19,13 @@
     />
   </head>
   <body>
-      <jsp:include page="navbar.jsp"/>
-
+    <jsp:include page="navbar.jsp" />
     <!--Main Content-->
     <main>
       <h1>Main Content</h1>
     </main>
 
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="footer.jsp" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

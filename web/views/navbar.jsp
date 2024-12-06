@@ -20,6 +20,8 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   "
 >
   <div class="container-fluid">
@@ -42,15 +44,36 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Players</a>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Players
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Blue Lock</a></li>
+            <li><a class="dropdown-item" href="#">Japan U-20</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
-          <button class="btn btn-primary">Login</button>
-          <button class="btn btn-primary">Sign Up</button>
+          <% if (session != null) { if ((Boolean)
+          session.getAttribute("isLoggedIn") != null && (Boolean)
+          session.getAttribute("isLoggedIn") == true) { %>
+          <div>Welcome back, <%= session.getAttribute("username")%>!</div>
+          <a href="logout" class="btn btn-danger">Logout</a>
+          <% } else { %>
+          <a href="login" class="btn btn-primary">Login</a>
+
+          <% } } else { %>
+          <a href="login" class="btn btn-primary">Login</a>
+          <% } %>
         </div>
       </ul>
     </div>
