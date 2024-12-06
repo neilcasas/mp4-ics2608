@@ -19,7 +19,6 @@
     <body>
             <jsp:include page="navbar.jsp" />
             <main>
-                <div class=""
         <h1>Tickets</h1>
             </main>
             <jsp:include page="footer.jsp" />
