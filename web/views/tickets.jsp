@@ -1,3 +1,5 @@
+<%@page import="classes.Stadium.SeatType"%>
+<%@page import="classes.Stadium"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -20,7 +22,35 @@
             <jsp:include page="navbar.jsp" />
             <main>
         <h1>Tickets</h1>
-        <h1><%= application.getAttribute("stadium") %></h1>
+        <h1><% Stadium stadium = (Stadium) application.getAttribute("stadium"); %></h1>
+        
+        <table class="table table-hover">
+        <% 
+            for (SeatType type : SeatType.values()) { // Using SeatType.values() directly
+        %>
+        <tbody>
+            <tr>
+                <td>
+            <%= Stadium.getSeatString(type) %>
+                </td>
+                <td>
+            <%= Stadium.getSeatPrice(type) %> 
+                </td>
+                
+                <% if(session != null) {
+                    if((Boolean)session.getAttribute("isLoggedIn") != null && (Boolean)session.getAttribute("isLoggedIn") == true) {
+                    %>
+                    <td>
+                        <button class="btn btn-primary">Buy</button>
+                    </td>
+                    <% } 
+                } %>
+        <% 
+            } 
+        %>
+        </tr>
+        </tbody>
+        </table>
             </main>
             <jsp:include page="footer.jsp" />
                 <script
