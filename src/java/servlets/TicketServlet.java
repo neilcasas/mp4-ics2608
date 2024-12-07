@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import classes.Stadium;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 
@@ -27,19 +29,7 @@ public class TicketServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        ServletContext context = getServletContext();
-       
-        InputStream csvInputStream = context.getResourceAsStream("/csv/seats.csv");
-
-        if (csvInputStream == null) {
-            System.out.println("Resource not found: /csv/seats.csv");
-        } else {
-            System.out.println("Resource loaded successfully!");
-        }
-        Stadium stadium = new Stadium(csvInputStream);
-        context.setAttribute("stadium", stadium);
+        throws ServletException, IOException {
         
         RequestDispatcher rd = request.getRequestDispatcher("views/tickets.jsp");
         rd.forward(request, response);

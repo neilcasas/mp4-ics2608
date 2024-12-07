@@ -20,8 +20,7 @@
             <jsp:include page="navbar.jsp" />
             <main>
         <h1>Tickets</h1>
-<!--        <h1><%= application.getAttribute("stadium") %></h1>
-        <h1><%= application.getRealPath("/csv/seats.csv") %></h1>-->
+        <h1><%= application.getAttribute("stadium") %></h1>
             </main>
             <jsp:include page="footer.jsp" />
                 <script

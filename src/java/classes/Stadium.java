@@ -1,10 +1,9 @@
 package classes;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
     public class Stadium {
         
@@ -97,11 +96,64 @@ import java.io.InputStreamReader;
                     }
                 }
                 System.out.println("Stadium loaded!");
-            } catch(IOException e) {
+            } catch(IOException e) {    
                         e.printStackTrace();
             }
         }
+        public Stadium() {
+            // Fill up VIP of north stands 
+            for(int i = 0; i < northStandsVIP.length; i++) {
+                for (int j = 3; j < northStandsVIP[i].length; j++) {
+                    northStandsVIP[i][j] = true;
+                }
+            }
+            
+            // Fill up regular north stands
+            for (int i = 0; i < northStandsRegular.length; i++) {
+                for (int j = 2; j < northStandsRegular[i].length; j++) {
+                    northStandsRegular[i][j] = true;
+                }
+            }
 
+            // Fill up VIP of south stands
+            for (int i = 0; i < southStandsVIP.length; i++) {
+                Arrays.fill(southStandsVIP[i], true);
+            }
+
+            // Fill up regular south stands
+            for (int i = 0; i < southStandsRegular.length; i++) {
+                for (int j = 0; j < 8; j++) {
+                    southStandsRegular[i][j] = true;
+                }
+            }
+
+            // Fill up VIP of home stands
+            for (int i = 0; i < homeVIP.length; i++) {
+                for (int j = 0; j < 5; j++) {
+                    homeVIP[i][j] = true;
+                }
+            }
+
+            // Fill up regular home stands
+            for (int i = 0; i < homeRegular.length; i++) {
+                for (int j = 0; j < 6; j++) {
+                    homeRegular[i][j] = true;
+                }
+            }
+
+            // Fill up VIP of away stands
+            for (int i = 0; i < awayVIP.length; i++) {
+                Arrays.fill(awayVIP[i], true);
+            }
+
+            // Fill up regular away stands
+            for (int i = 0; i < awayRegular.length; i++) {
+                for (int j = 2; j < awayRegular[i].length; j++) {
+                    awayRegular[i][j] = true;
+                }
+            }
+        }
+        
         public static SeatType getSeatType(String seatArea, String seatLevel) {
             SeatType type = null;
             if(seatArea.equals("northStands") && seatLevel.equals("VIP")) {
