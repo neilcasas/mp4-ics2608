@@ -42,9 +42,6 @@ import java.util.List;
             return count == table.length;
         }
         
-        public List<SeatType> allSeatTypesList = Arrays.asList(SeatType.values());
-
-
         public Stadium(InputStream csvStream) {
             String line = "";
             String splitBy = ",";

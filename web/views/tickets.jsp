@@ -1,5 +1,6 @@
 <%@page import="classes.Stadium.SeatType"%>
 <%@page import="classes.Stadium"%>
+<% Stadium stadium = (Stadium) application.getAttribute("stadium"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -22,19 +23,30 @@
             <jsp:include page="navbar.jsp" />
             <main>
         <h1>Tickets</h1>
-        <h1><% Stadium stadium = (Stadium) application.getAttribute("stadium"); %></h1>
-        
+
+        <% if (session == null) { %>
+            <div>You have to be logged in to purchase a ticket.</div>
+        <% } else { 
+                if((Boolean) session.getAttribute("isLoggedIn") == null || (Boolean)session.getAttribute("isLoggedIn") == false) {
+                %>
+               <div>You have to be logged in to purchase a ticket.</div>
+               <% } 
+        } %>
         <table class="table table-hover">
-        <% 
-            for (SeatType type : SeatType.values()) { // Using SeatType.values() directly
-        %>
+            <thead>
+                <th scope="col">Area</th>
+                <th scope="col">Price</th>
+            </thead>
         <tbody>
+                <% 
+                    for (SeatType type : SeatType.values()) {
+                %>
             <tr>
                 <td>
-            <%= Stadium.getSeatString(type) %>
+                <%= Stadium.getSeatString(type) %>
                 </td>
                 <td>
-            <%= Stadium.getSeatPrice(type) %> 
+                <%= Stadium.getSeatPrice(type) %> 
                 </td>
                 
                 <% if(session != null) {
