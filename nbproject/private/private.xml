@@ -5,12 +5,13 @@
         <group>
             <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/classes/DateContextListener.java</file>
             <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/servlets/LoginServlet.java</file>
-            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/web/views/index.jsp</file>
-            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/web/views/tickets.jsp</file>
-            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/web/views/footer.jsp</file>
+            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/servlets/TicketServlet.java</file>
+            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/build/web/csv/seats.csv</file>
+            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/web/views/navbar.jsp</file>
             <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/classes/Stadium.java</file>
-            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/servlets/LogoutServlet.java</file>
+            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/src/java/classes/StadiumContextListener.java</file>
+            <file>file:/C:/Users/neila/Documents/dev/mp4-ics2608/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

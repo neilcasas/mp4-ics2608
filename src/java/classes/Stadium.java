@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
     public class Stadium {
         
@@ -39,11 +41,24 @@ import java.io.IOException;
             return count == table.length;
         }
 
-        public Stadium(File csvPath) {
+        public Stadium(InputStream csvStream) {
             String line = "";
             String splitBy = ",";
+            // Initialize all elements to false
+            for (int i = 0; i < northStandsVIP.length; i++) {
+                for (int j = 0; j < northStandsVIP[i].length; j++) {
+                    northStandsVIP[i][j] = false;
+                    northStandsRegular[i][j] = false;
+                    southStandsVIP[i][j] = false;
+                    southStandsRegular[i][j] = false;
+                    homeVIP[i][j] = false;
+                    homeRegular[i][j] = false;
+                    awayVIP[i][j] = false;
+                    awayRegular[i][j] = false;
+                }
+            }
             try {
-                BufferedReader br = new BufferedReader(new FileReader(csvPath));
+                BufferedReader br = new BufferedReader(new InputStreamReader(csvStream));
                 while ((line = br.readLine()) != null) {
                     String[] seatString = line.split(splitBy);
                     
