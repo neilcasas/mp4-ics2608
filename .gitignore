@@ -1,2 +1,17 @@
-/dist/
-/build/
+# NetBeans-specific files and directories
+nbproject/private/
+nbproject/configs/
+
+# Build output directories
+build/
+dist/
+
+# Compiled Java files
+*.class
+
+# Logs
+*.log
+
+# Other unnecessary files
+*.DS_Store
+*.iml
