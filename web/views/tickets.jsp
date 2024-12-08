@@ -85,6 +85,10 @@
                 border: 2px solid grey;
             }
             
+            .hide {
+                display: none;
+            }
+            
         </style>
     </head>
     <body>
@@ -204,6 +208,16 @@
                         list.innerHTML = "Selected seats: " + getSelectedString();
                     });
                     
+                    // Conditionally show selected seat list and sum
+                    if(selectedSeats.size === 0) {
+                        selectedSeatsList.forEach((list) => {
+                            list.classList.add("hide");
+                        })
+                    } else {
+                        selectedSeatsList.forEach((list) => {
+                            list.classList.remove("hide");
+                        })
+                    }
                 });     
             });
             
