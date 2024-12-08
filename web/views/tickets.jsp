@@ -203,19 +203,30 @@
                     
                     seat.classList.toggle("selected");
                     
-                    // Update selected seats
+                    // Update selected seats and sum
                     selectedSeatsList.forEach((list) => {
                         list.innerHTML = "Selected seats: " + getSelectedString();
                     });
+                    
+                    selectedSum.forEach((sum) => {
+                        sum.innerHTML = "Total: " + getSelectedSum();
+                    })
                     
                     // Conditionally show selected seat list and sum
                     if(selectedSeats.size === 0) {
                         selectedSeatsList.forEach((list) => {
                             list.classList.add("hide");
                         })
+                        
+                        selectedSum.forEach((sum) => {
+                            sum.classList.add("hide");
+                        })
                     } else {
                         selectedSeatsList.forEach((list) => {
                             list.classList.remove("hide");
+                        })
+                        selectedSum.forEach((sum) => {
+                            sum.classList.remove("hide");
                         })
                     }
                 });     
@@ -229,7 +240,13 @@
                         .join(", ");
                 }
                 
-                
+                function getSelectedSum() {
+                    const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
+                    let sum = 0;
+                    return seatObjects
+                            .reduce((sum, seat) => sum + seat.price, 0);
+                    
+                }
             });
         </script>
     </body>
