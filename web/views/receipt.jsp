@@ -1,16 +1,19 @@
-<%-- 
-    Document   : receipt
-    Created on : 12 9, 24, 1:12:51 AM
-    Author     : neila
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="classes.Ticket"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="classes.Stadium"%>
+<%@page import="classes.Stadium.SeatType"%>
+<% 
+    // Retrieve attributes from ServletContext
+    ArrayList<Ticket> tickets = (ArrayList<Ticket>) application.getAttribute("tickets");
+    Integer total = (Integer) application.getAttribute("total");
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link
+        <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -21,8 +24,32 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Confirmation Receipt</h1>
-        <%= application.getAttribute("tickets") %>
-        <%= application.getAttribute("total") %>
+        <main>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Seat Type</th>
+                    <th>Row</th>
+                    <th>Column</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(Ticket ticket : tickets) { %>
+                <tr>
+                    <td><%= Stadium.getSeatString(ticket.getSeatType()) %></td>
+                    <td><%= ticket.getRow() %></td>
+                    <td><%= ticket.getColumn() %></td>
+                </tr>
+                <% } %>
+                <tr>
+                    <th scope="row">TOTAL</th>
+                    <td colspan="2"><%= total %></td>
+                </tr>
+            </tbody>
+        </table>
+                <button class="btn btn-primary">Confirm Purchase</button>
+                <button class="btn btn-danger">Cancel Purchase</button>
+        </main>
         <jsp:include page="footer.jsp" />
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

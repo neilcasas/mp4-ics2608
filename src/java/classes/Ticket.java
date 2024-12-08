@@ -20,4 +20,14 @@ public class Ticket {
         this.column = column;
         this.type = type;
     }
+    
+    public int getRow(){
+        return this.row;
+    }
+    public int getColumn() {
+        return this.column;
+    }
+    public SeatType getSeatType() {
+        return this.type;
+    }
 }
