@@ -39,11 +39,10 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav d-flex w-100">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Home</a>
+          <a class="nav-link" aria-current="page" href="/mp4-ics2608/">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -56,30 +55,27 @@
             Players
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/views/bluelock.jsp">Blue Lock</a></li>
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/views/u20japan.jsp">U-20 Japan</a></li>
+            <li><a class="dropdown-item" href="#">Blue Lock</a></li>
+            <li><a class="dropdown-item" href="#">Japan U-20</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Tickets</a>
+          <a class="nav-link" href="/mp4-ics2608/views/tickets.jsp">Tickets</a>
         </li>
         <div class="ms-auto d-flex gap-2">
-          <% if (session != null) { 
-               if ((Boolean) session.getAttribute("isLoggedIn") != null && 
-                   (Boolean) session.getAttribute("isLoggedIn") == true) { %>
-            <div>Welcome back, <%= session.getAttribute("username")%>!</div>
-            <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger">Logout</a>
+          <% if (session != null) { if ((Boolean)
+          session.getAttribute("isLoggedIn") != null && (Boolean)
+          session.getAttribute("isLoggedIn") == true) { %>
+          <div>Welcome back, <%= session.getAttribute("username")%>!</div>
+          <a href="/mp4-ics2608/logout" class="btn btn-danger">Logout</a>
           <% } else { %>
-            <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Login</a>
+          <a href="/mp4-ics2608/login" class="btn btn-primary">Login</a>
+
           <% } } else { %>
-            <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Login</a>
+          <a href="/mp4-ics2608/login" class="btn btn-primary">Login</a>
           <% } %>
         </div>
       </ul>
     </div>
-
-    
-      
-      
   </div>
 </nav>
