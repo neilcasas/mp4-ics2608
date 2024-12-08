@@ -122,7 +122,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel"><%= Stadium.getSeatString(type) %></h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close ticket-closer" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <form action="purchase" method="get">
                                                 <div class="modal-body">
@@ -149,7 +149,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-danger ticket-closer" data-bs-dismiss="modal">Cancel</button>
                                                     <input type="submit" class="btn btn-primary" value="Purchase">
                                                 </div>
                                                 </form>
@@ -178,6 +178,7 @@
             const selectedSeats = new Set();
             const selectedSum = document.querySelectorAll(".selected-seats-total");
             const selectedSeatsList = document.querySelectorAll(".selected-seats-list");
+            const ticketClosers = document.querySelectorAll(".ticket-closer");
             
             availableSeats.forEach((seat) => {
                seat.addEventListener("click", () => {
@@ -229,9 +230,31 @@
                             sum.classList.remove("hide");
                         })
                     }
+                    
+                    console.log(selectedSeats);
                 });     
             });
             
+            // Clear ticket set when closing modal
+            ticketClosers.forEach((closer) => {
+                closer.addEventListener("click", () => {
+                    selectedSeats.clear();
+                    console.log(selectedSeats);
+                    
+                    availableSeats.forEach((seat) => {
+                        seat.classList.remove("selected");
+                    })
+                    
+                    selectedSeatsList.forEach((list) => {
+                        list.classList.add("hide");
+                        list.innerHTML = "";
+                    })
+                    selectedSum.forEach((sum) => {
+                        sum.classList.add("hide");
+                        sum.innerHTML = "";
+                    })
+                })
+            })
             
                 function getSelectedString() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
@@ -242,7 +265,6 @@
                 
                 function getSelectedSum() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
-                    let sum = 0;
                     return seatObjects
                             .reduce((sum, seat) => sum + seat.price, 0);
                     
