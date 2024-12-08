@@ -80,6 +80,11 @@
                 margin-right: 10px;
             }
             
+            .ticket_cell.available.selected {
+                background-color: yellow;
+                border: 2px solid grey;
+            }
+            
         </style>
     </head>
     <body>
@@ -129,15 +134,14 @@
                                                         <% 
                                                             for (int j = 0; j < table[i].length; j++) { 
                                                         %>
-                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>">
+                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>" data-row="<%=i%>" data-column="<%=j%>" data-seat-type="<%=type%>" data-price="<%= Stadium.getSeatPrice(type) %>">
                                                             <span class="ticket_tooltip"><%= "Row " + (i + 1) + ", Seat " + (j + 1) %></span>
-                                                            <input type="hidden" name="row" value="<%=i%>">
-                                                            <input type="hidden" name="column" value="<%=j%>">
-                                                            <input type="hidden" name="seat_type" value="<%=type%>">
                                                         </div>
                                                         <% } %>
                                                     </div>
                                                     <% } %>
+                                                     <div class="<%=type + " selected-seats-list"%>"></div>
+                                                     <div class="<%=type + " selected-seats-total"%>"></div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -164,5 +168,55 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            let availableSeats = document.querySelectorAll(".ticket_cell.available");
+            const selectedSeats = new Set();
+            const selectedSum = document.querySelectorAll(".selected-seats-total");
+            const selectedSeatsList = document.querySelectorAll(".selected-seats-list");
+            
+            availableSeats.forEach((seat) => {
+               seat.addEventListener("click", () => {
+                   // Get data from seat DOM element
+                   const seatRow = seat.dataset.row;
+                   const seatColumn = seat.dataset.column;
+                   const seatType = seat.dataset.seatType;
+                   const seatPrice = Number(seat.dataset.price);
+                   const seatObject = JSON.stringify({
+                       row: seatRow,
+                       column: seatColumn,
+                       type: seatType,
+                       price: seatPrice
+                   });
+                   
+                   // If selected again, remove from selected seats
+                   if(selectedSeats.has(seatObject)) {
+                        selectedSeats.delete(seatObject);
+                    } else {
+                        selectedSeats.add(seatObject);
+                    }
+                    
+                    
+                    seat.classList.toggle("selected");
+                    
+                    // Update selected seats
+                    selectedSeatsList.forEach((list) => {
+                        list.innerHTML = "Selected seats: " + getSelectedString();
+                    });
+                    
+                });     
+            });
+            
+            
+                function getSelectedString() {
+                    const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
+                    return seatObjects
+                        .map((seat) => "R" + (++seat.row) + "-C" + (++seat.column))
+                        .join(", ");
+                }
+                
+                
+            });
+        </script>
     </body>
 </html>
