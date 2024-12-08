@@ -10,14 +10,14 @@ import java.util.List;
     public class Stadium {
         
         public enum SeatType {
-            NORTH_STANDS_VIP,
-            NORTH_STANDS_REGULAR,
-            SOUTH_STANDS_VIP,
-            SOUTH_STANDS_REGULAR,
             HOME_VIP,
-            HOME_REGULAR,
             AWAY_VIP,
-            AWAY_REGULAR
+            NORTH_STANDS_VIP,
+            SOUTH_STANDS_VIP,
+            HOME_REGULAR,
+            AWAY_REGULAR,
+            NORTH_STANDS_REGULAR,
+            SOUTH_STANDS_REGULAR
         }
         
         Boolean[][] northStandsVIP = new Boolean[5][10];
@@ -103,6 +103,19 @@ import java.util.List;
             }
         }
         public Stadium() {
+            // Initialize all elements to false
+            for (int i = 0; i < northStandsVIP.length; i++) {
+                for (int j = 0; j < northStandsVIP[i].length; j++) {
+                    northStandsVIP[i][j] = false;
+                    northStandsRegular[i][j] = false;
+                    southStandsVIP[i][j] = false;
+                    southStandsRegular[i][j] = false;
+                    homeVIP[i][j] = false;
+                    homeRegular[i][j] = false;
+                    awayVIP[i][j] = false;
+                    awayRegular[i][j] = false;
+                }
+            }
             // Fill up VIP of north stands 
             for(int i = 0; i < northStandsVIP.length; i++) {
                 for (int j = 3; j < northStandsVIP[i].length; j++) {
@@ -244,5 +257,50 @@ import java.util.List;
                     break;
             }
             return price;
+        }
+        
+        public Boolean[][] getTableFromType(SeatType seatType) {
+            Boolean[][] table = null;
+            switch(seatType) {
+                case NORTH_STANDS_VIP:
+                    table = this.northStandsVIP;
+                    break;
+                case NORTH_STANDS_REGULAR:
+                    table = this.northStandsRegular;
+                    break;
+                case SOUTH_STANDS_VIP:
+                    table = this.southStandsVIP;
+                    break;
+                case SOUTH_STANDS_REGULAR:
+                    table = this.southStandsRegular;
+                    break;
+                case HOME_VIP:
+                    table = this.homeVIP;
+                    break;
+                case HOME_REGULAR:
+                    table = this.homeRegular;
+                    break;
+                case AWAY_VIP:
+                    table = this.awayVIP;
+                    break;
+                case AWAY_REGULAR:
+                    table = this.awayRegular;
+                    break;
+                default: 
+                    break;
+            }
+            return table;
+        }
+        
+        public Boolean isAreaFull(SeatType seatType) {
+            Boolean[][] table = this.getTableFromType(seatType);
+            
+            for(int i = 0; i < table.length; i++) {
+                for (int j = 0; j < table[i].length; j++) {
+                    return table[i][j] == false; // if there exists a free seat
+                }
+            }
+            
+            return true;
         }
     }

@@ -51,11 +51,18 @@
                 
                 <% if(session != null) {
                     if((Boolean)session.getAttribute("isLoggedIn") != null && (Boolean)session.getAttribute("isLoggedIn") == true) {
+                        if(stadium.isAreaFull(type)) {
                     %>
+                    <td>
+                        <button class="btn btn-secondary" disabled>Unavailable</button>
+                    </td>
+                    <%} else {%>
                     <td>
                         <button class="btn btn-primary">Buy</button>
                     </td>
-                    <% } 
+                    
+                    <% }
+                    } 
                 } %>
         <% 
             } 
