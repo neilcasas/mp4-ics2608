@@ -35,8 +35,6 @@
             .ticket_cell {
                 height: 20px;
                 width: 20px;
-                background-color: cornflowerblue;
-                border: 2px solid grey;
                 margin: 0px 2px;
             }
             .modal-body {
@@ -44,6 +42,15 @@
                 align-items: center;
                 justify-content: center;
             }
+            
+            .ticket_cell.taken {
+                background-color: grey;
+            }
+            
+            .ticket_cell.available {
+                background-color: cornflowerblue;
+            }
+            
         </style>
     </head>
     <body>
@@ -79,6 +86,7 @@
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel"><%= Stadium.getSeatString(type) %></h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <form action="purchase" method="get">
                                                 <div class="modal-body">
                                                     <div class="<%= type + " ticket_table"%>">
                                                     <% 
@@ -86,10 +94,15 @@
                                                         for (int i = 0; i < table.length; i++) { 
                                                     %>
                                                     <div class="<%=type + " ticket_row"%>">
+                                                        <%= i + 1 %>  
                                                         <% 
                                                             for (int j = 0; j < table[i].length; j++) { 
                                                         %>
-                                                        <div class="<%=type + " ticket_cell"%>"></div>
+                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>">
+                                                            <input type="hidden" name="row" value="<%=i%>">
+                                                            <input type="hidden" name="column" value="<%=j%>">
+                                                            <input type="hidden" name="seat_type" value="<%=type%>">
+                                                        </div>
                                                         <% } %>
                                                     </div>
                                                     <% } %>
@@ -97,8 +110,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <input type="submit" class="btn btn-primary" value="Purchase">
                                                 </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

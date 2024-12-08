@@ -297,10 +297,11 @@ import java.util.List;
             
             for(int i = 0; i < table.length; i++) {
                 for (int j = 0; j < table[i].length; j++) {
-                    return table[i][j] == false; // if there exists a free seat
+                    if(table[i][j] == false) {
+                        return false;// if there exists a free seat
                 }
             }
-            
+           } 
             return true;
         }
     }
