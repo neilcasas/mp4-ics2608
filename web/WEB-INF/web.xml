@@ -13,8 +13,8 @@
         <servlet-class>servlets.TicketServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PurchaseServlet</servlet-name>
-        <servlet-class>servlets.PurchaseServlet</servlet-class>
+        <servlet-name>ReceiptServlet</servlet-name>
+        <servlet-class>servlets.ReceiptServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -29,8 +29,8 @@
         <url-pattern>/tickets</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PurchaseServlet</servlet-name>
-        <url-pattern>/purchase</url-pattern>
+        <servlet-name>ReceiptServlet</servlet-name>
+        <url-pattern>/receipt</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -275,14 +275,22 @@
                 
 
                 function buyTicket() {
-                    const url = "/mp4-ics2608/purchase";
+                    const url = "/mp4-ics2608/receipt";  // Ensure this URL is correct.
 
                     fetch(url, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: getResponseStringFromTickets()
+                        body: getResponseStringFromTickets()  // Pass your ticket data.
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Redirect to receipt page or refresh if necessary.
+                            window.location.href = "/mp4-ics2608/receipt";  // Adjust the path as needed
+                        } else {
+                            console.error("Failed to send request:", response.statusText);
+                        }
                     })
                     .catch(error => {
                         console.log("Error sending request:", error);

@@ -4,9 +4,15 @@
  */
 package servlets;
 
+import classes.Stadium;
+import classes.Stadium.SeatType;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import classes.Ticket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author neila
  */
-public class PurchaseServlet extends HttpServlet {
+public class ReceiptServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,11 +44,41 @@ public class PurchaseServlet extends HttpServlet {
                     requestBody.append(line);
                 }
             }
-
-            // Process the data (e.g., store in database, etc.)
-            // For now, let's log the selected seats
-            System.out.println("Received selected seats: " + requestBody.toString());
+            
+            // Create an array of Tickets to be added to cookie
+            String[] requestTickets = requestBody.toString().split(",");
+            System.out.println(Arrays.toString(requestTickets));
+            ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+            
+            int total = 0;
+            for(String reqTicket : requestTickets) {
+               // Get ticket parts
+               String[] reqTicketParts = reqTicket.split("-");
+               int reqTicketRow = Integer.parseInt(reqTicketParts[0].trim());
+               int reqTicketColumn = Integer.parseInt(reqTicketParts[1].trim());
+               SeatType reqTicketType = SeatType.valueOf(reqTicketParts[2].trim());
+               
+               // Add ticket price to total
+               int reqTicketPrice = Stadium.getSeatPrice(reqTicketType);
+               total += reqTicketPrice;
+               
+               // Add ticket object to list of tickets
+               Ticket ticket = new Ticket(reqTicketRow, reqTicketColumn, reqTicketType);
+               tickets.add(ticket);
             }
+            
+            // Add total and current order to context
+            ServletContext context = getServletContext();
+            context.setAttribute("total", total);
+            context.setAttribute("tickets", tickets);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("views/receipt.jsp");
+            rd.forward(request, response);
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher("views/receipt.jsp");
+            rd.forward(request, response);
+        }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
