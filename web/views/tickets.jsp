@@ -56,19 +56,28 @@
             .ticket_cell .ticket_tooltip {
                 visibility: hidden;
                 width: 120px;
-                background-color: black;
                 color: #fff;
                 text-align: center;
                 padding: 5px 0;
-                border-radius: 6px;
                 position: absolute;
                 z-index: 1;
                 top: 20px;
                 left: 110%;
+                background: rgba( 2, 2, 2, 0.55 );
+                backdrop-filter: blur( 9.5px );
+                -webkit-backdrop-filter: blur( 9.5px );
+                border-radius: 10px;
+                border: 1px solid rgba( 255, 255, 255, 0.18 );
             }
             
             .ticket_cell:hover .ticket_tooltip {
                 visibility: visible;
+            }
+            
+            .ticket_row_count {
+                display: flex;
+                align-content: center;
+                margin-right: 10px;
             }
             
         </style>
@@ -114,7 +123,9 @@
                                                         for (int i = 0; i < table.length; i++) { 
                                                     %>
                                                     <div class="<%=type + " ticket_row"%>">
-                                                        <%= i + 1 %>  
+                                                        <div class="ticket_row_count">
+                                                            <%= i + 1 %>
+                                                        </div>
                                                         <% 
                                                             for (int j = 0; j < table[i].length; j++) { 
                                                         %>
@@ -130,7 +141,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                                     <input type="submit" class="btn btn-primary" value="Purchase">
                                                 </div>
                                                 </form>
