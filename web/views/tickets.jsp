@@ -33,6 +33,8 @@
             }
             
             .ticket_cell {
+                position:relative;
+                display: inline-block;
                 height: 20px;
                 width: 20px;
                 margin: 0px 2px;
@@ -49,6 +51,24 @@
             
             .ticket_cell.available {
                 background-color: cornflowerblue;
+            }
+            
+            .ticket_cell .ticket_tooltip {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                padding: 5px 0;
+                border-radius: 6px;
+                position: absolute;
+                z-index: 1;
+                top: 20px;
+                left: 110%;
+            }
+            
+            .ticket_cell:hover .ticket_tooltip {
+                visibility: visible;
             }
             
         </style>
@@ -99,6 +119,7 @@
                                                             for (int j = 0; j < table[i].length; j++) { 
                                                         %>
                                                         <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>">
+                                                            <span class="ticket_tooltip"><%= "Row " + (i + 1) + ", Seat " + (j + 1) %></span>
                                                             <input type="hidden" name="row" value="<%=i%>">
                                                             <input type="hidden" name="column" value="<%=j%>">
                                                             <input type="hidden" name="seat_type" value="<%=type%>">
