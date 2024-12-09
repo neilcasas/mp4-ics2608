@@ -48,6 +48,33 @@
                 position: relative; /* Ensures content is above the overlay */
                 z-index: 2;
             }
+            .factions {
+                display: flex;
+                min-height: 20vh;
+                
+            }
+            .blue-lock, .japan-u20 {
+                display: flex;
+                flex:1;
+                flex-direction: column;
+                min-height: 20vh;
+                color: white;
+                gap: 20px;
+                padding: 30px;
+            }
+            .blue-lock {
+                background-color: #004097;
+            }
+
+            .japan-u20 {
+                background-color: #920e0e;
+            }
+            
+            @media (max-width: 992px) {
+                .factions {
+                    flex-direction: column;
+                }
+            }
 
             @media (max-width: 576px) {
                 .banner {
@@ -55,6 +82,7 @@
                     padding: 10px;
                 }
             }
+
         </style>
     </head>
     <body>
@@ -68,6 +96,20 @@
                     <a href="tickets" class="btn btn-primary">Buy Tickets</a>
                 </div>
             </header>
+            <div class="factions">
+                <div class="blue-lock">
+                    <h1>Blue Lock</h1>
+                    <div class="blue-lock-description">
+                        The Blue Lock Project or Player Improvement Project, is a special football project funded by the Japanese Football Union with the intention of developing not only the best striker in the world, but a hero for Japan to follow using Jinpachi Ego's extreme training regimens and coaching.
+                    </div>
+                    <a href="/mp4-ics2608/views/bluelock.jsp" class="btn btn-primary">Learn More</a>
+                </div>
+                <div class="japan-u20">
+                    <h1>Japan's Under 20 Football Men's</h1>
+                    <div class="japan-u20-description">The Japan U-20 or (Japan National Under-20 Football Team) is a national association team of Japan of players who are under the age of 20 and is controlled by the Japan Football Association.</div>
+                    <a href="/mp4-ics2608/views/u20japan.jsp" class="btn btn-danger">Learn More</a>
+                </div>
+            </div>
         </main>
 
         <jsp:include page="footer.jsp" />
