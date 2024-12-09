@@ -67,7 +67,7 @@
                     <p><strong>Position:</strong> Offensive Midfielder</p>
                     <p>
                         He is a member of the youth team of the prestigious Spanish club team
-                        "Re Al" and has been selected as one of the new generation 
+                        "Reale" and has been selected as one of the new generation 
                         world's best 11 players, attracting attention from all over the 
                         world. He had completely given up on Japanese soccer, thinking it 
                         was of a low level, but when he returned to Japan for a short visit,

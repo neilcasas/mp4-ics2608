@@ -3,7 +3,7 @@
 <% Stadium stadium = (Stadium) application.getAttribute("stadium"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
+<% 
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
     response.setHeader("Pragma", "no-cache"); 
     response.setDateHeader("Expires", 0);   
