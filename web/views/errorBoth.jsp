@@ -59,9 +59,9 @@
       <div class="card border-0 shadow">
         <div class="card-body">
           <h3 class="text-center mb-4">Error</h3>
-          <p class="text-center mb-3">Your login credentials don't match an account in our system.</p>
+          <p class="text-center mb-3">Your username and password is incorrect</p>
           <div class="text-center">
-            <a href="views/login.jsp" class="btn btn-primary w-100">Go Back to Login</a>
+            <a href="/mp4-ics2608/views/login.jsp" class="btn btn-primary w-100">Go Back to Login</a>
           </div>
         </div>
       </div>

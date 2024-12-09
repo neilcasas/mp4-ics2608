@@ -59,7 +59,7 @@
       <div class="card border-0 shadow">
         <div class="card-body">
           <h3 class="text-center mb-4">Error</h3>
-          <p class="text-center mb-3">Both username and password are required.</p>
+          <p class="text-center mb-3">Your username is incorrect.</p>
           <div class="text-center">
             <a href="/mp4-ics2608/views/login.jsp" class="btn btn-primary w-100">Go Back to Login</a>
           </div>

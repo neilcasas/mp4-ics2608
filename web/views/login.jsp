@@ -69,7 +69,7 @@
                             <input type="password" class="form-control" id="password" name="formPassword" placeholder="Enter your password">
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
-                        <a href="/mp4-ics2608" class="btn btn-secondary w-100 mt-2">Continue as Guest</a>
+                        <a href="/mp4-ics2608/views/guest.jsp" class="btn btn-secondary w-100 mt-2">Continue as Guest</a>
                     </form>
                 </div>
             </div>

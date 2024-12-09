@@ -21,27 +21,43 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String formUsername = request.getParameter("formUsername");
-        String formPassword = request.getParameter("formPassword");
-        
-        String actualUsername = getServletContext().getInitParameter("actualUsername");
-        String actualPassword = getServletContext().getInitParameter("actualPassword");
-        
-        if(formUsername.equals(actualUsername) && formPassword.equals(actualPassword)){
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("username",formUsername);
-            session.setAttribute("isLoggedIn", true); 
-            response.sendRedirect("/mp4-ics2608/views/index.jsp");
-            
-        }
-        
-        else {
-            response.sendRedirect("/mp4-ics2608/views/login.jsp");
-        }
+        throws ServletException, IOException {
+    
+    String formUsername = request.getParameter("formUsername");
+    String formPassword = request.getParameter("formPassword");
+    
+    String actualUsername = getServletContext().getInitParameter("actualUsername");
+    String actualPassword = getServletContext().getInitParameter("actualPassword");
+    
+    // Check for missing input
+    if ((formUsername == null || formUsername.trim().isEmpty()) && (formPassword == null || formPassword.trim().isEmpty())) {
+        response.sendRedirect("/mp4-ics2608/views/errorNoInput.jsp");
     }
+    // Check if username is incorrect
+    else if (!formUsername.equals(actualUsername) && formPassword.equals(actualPassword)) {
+        response.sendRedirect("/mp4-ics2608/views/errorUsername.jsp");
+    }
+    // Check if password is incorrect
+    else if (formUsername.equals(actualUsername) && !formPassword.equals(actualPassword)) {
+        response.sendRedirect("/mp4-ics2608/views/errorPassword.jsp");
+    }
+    // Check if both username and password are incorrect
+    else if (!formUsername.equals(actualUsername) && !formPassword.equals(actualPassword)) {
+        response.sendRedirect("/mp4-ics2608/views/errorBoth.jsp");
+    }
+    // If both are correct, log the user in
+    else if (formUsername.equals(actualUsername) && formPassword.equals(actualPassword)) {
+        HttpSession session = request.getSession();
+        session.setAttribute("username", formUsername);
+        session.setAttribute("isLoggedIn", true);
+        response.sendRedirect("/mp4-ics2608/views/index.jsp");
+    }
+    // Fallback to login page
+    else {
+        response.sendRedirect("/mp4-ics2608/views/login.jsp");
+    }
+}
+
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
