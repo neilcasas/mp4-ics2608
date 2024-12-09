@@ -3,6 +3,20 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="classes.Stadium"%>
 <%@page import="classes.Stadium.SeatType"%>
+<%@ page session="true" %>
+<%
+    // Check if the session has a 'username' attribute
+    if (session.getAttribute("username") == null) {
+        // If not logged in, redirect to a 403 error page
+        response.sendRedirect("/mp4-ics2608/views/403.jsp");
+    }
+
+    // Prevent caching of the page (important to prevent the back button issue)
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+%>
+
 <% 
     // Retrieve attributes from ServletContext
     ArrayList<Ticket> tickets = (ArrayList<Ticket>) application.getAttribute("tickets");
@@ -59,7 +73,7 @@
                 <% } %>
                 <tr>
                     <th scope="row">TOTAL</th>
-                    <td colspan="2"><%= total %></td>
+                    <td colspan="2">$<%= total %></td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,5 @@
 <%-- Document : navbar Created on : 12 5, 24, 9:31:25 PM Author : neila --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <div
   class="header-text w-100"
   style="

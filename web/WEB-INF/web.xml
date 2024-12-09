@@ -56,14 +56,14 @@
         </listener-class>
     </listener>
     <context-param>
-        <param-name>username</param-name>
+        <param-name>actualUsername</param-name>
         <param-value>cave_johnson12</param-value>
     </context-param>
     <context-param>
-        <param-name>password</param-name>
+        <param-name>actualPassword</param-name>
         <param-value>admin123</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>views/index.jsp</welcome-file>
+        <welcome-file>views/guest.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

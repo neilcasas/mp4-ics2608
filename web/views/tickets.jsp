@@ -156,7 +156,7 @@
                             %>
                             <tr>
                                 <td><%= Stadium.getSeatString(type)%></td>
-                                <td><%= Stadium.getSeatPrice(type)%></td>
+                                <td>$<%= Stadium.getSeatPrice(type)%></td>
                                 <td>
                                     <% if (session != null && (Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) {
                                     if (stadium.isAreaFull(type)) { %>

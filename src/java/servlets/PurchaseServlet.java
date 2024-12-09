@@ -72,7 +72,7 @@ public class PurchaseServlet extends HttpServlet {
             
             RequestDispatcher rd = request.getRequestDispatcher("views/ordered.jsp");
             rd.forward(request, response);
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
