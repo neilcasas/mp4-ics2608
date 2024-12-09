@@ -67,7 +67,7 @@
           <% if (session != null) { 
                if ((Boolean) session.getAttribute("isLoggedIn") != null && 
                    (Boolean) session.getAttribute("isLoggedIn") == true) { %>
-            <div>Welcome back, <%= session.getAttribute("username")%>!</div>
+                   <div>Welcome back, <a href="/mp4-ics2608/views/ordered.jsp"><%= session.getAttribute("username")%>!</a></div>
             <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger">Logout</a>
           <% } else { %>
             <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Login</a>

@@ -10,12 +10,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import classes.Stadium.SeatType;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,17 +47,32 @@ public class PurchaseServlet extends HttpServlet {
             // Retrieve ticket order
             ArrayList<Ticket> tickets = (ArrayList<Ticket>) context.getAttribute("tickets");
             
+            // Get list of ordered tickets
+            HttpSession session = request.getSession();
+            ArrayList<Ticket> orderedTickets = (ArrayList<Ticket>) session.getAttribute("ordered-tickets");
+
+            if (orderedTickets == null) {
+                orderedTickets = new ArrayList<>();
+            }
+            
             // Turn seats into true
             for(Ticket ticket : tickets) {
+                orderedTickets.add(ticket);
                 SeatType type = ticket.getSeatType();
                 Boolean[][] table = stadium.getTableFromType(type);
                 table[ticket.getRow() - 1][ticket.getColumn() - 1] = true;
             }
+           
+            System.out.println(orderedTickets.toString());
+            session.setAttribute("ordered-tickets", orderedTickets); 
             
-            RequestDispatcher rd = request.getRequestDispatcher("views/index.jsp");
+            // Send a success message after ordering
+            request.setAttribute("successful-purchase", true);
+            
+            
+            RequestDispatcher rd = request.getRequestDispatcher("views/ordered.jsp");
             rd.forward(request, response);
-            
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
