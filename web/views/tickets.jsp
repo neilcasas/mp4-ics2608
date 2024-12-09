@@ -3,10 +3,10 @@
 <% Stadium stadium = (Stadium) application.getAttribute("stadium"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% 
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
-    response.setHeader("Pragma", "no-cache"); 
-    response.setDateHeader("Expires", 0);   
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
 %>
 <html>
     <head>
@@ -18,7 +18,7 @@
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
-        />
+            />
         <style>
             * {
                 margin: 0;
@@ -36,10 +36,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                height: 30px;
+                max-height: 30px;
                 width: fit-content;
             }
-            
+
             .ticket_cell {
                 position:relative;
                 display: inline-block;
@@ -52,15 +52,15 @@
                 align-items: center;
                 justify-content: center;
             }
-            
+
             .ticket_cell.taken {
                 background-color: grey;
             }
-            
+
             .ticket_cell.available {
                 background-color: cornflowerblue;
             }
-            
+
             .ticket_cell .ticket_tooltip {
                 visibility: hidden;
                 width: 120px;
@@ -77,26 +77,26 @@
                 border-radius: 10px;
                 border: 1px solid rgba( 255, 255, 255, 0.18 );
             }
-            
+
             .ticket_cell:hover .ticket_tooltip {
                 visibility: visible;
             }
-            
+
             .ticket_row_count {
                 display: flex;
                 align-content: center;
                 margin-right: 10px;
             }
-            
+
             .ticket_cell.available.selected {
                 background-color: yellow;
                 border: 2px solid grey;
             }
-            
+
             .hide {
                 display: none;
             }
-            
+
             .main-content {
                 display: flex;
                 gap: 30px;
@@ -119,19 +119,20 @@
                 width: 100%;
                 flex-direction:column;
             }
-            
+
             @media screen and (max-width: 992px) {
                 .main-content {
                     flex-direction: column-reverse;
+                    align-items: center;
                 }
-                
+
             }
         </style>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <main>
-            
+
             <div class="main-content">
                 <div class="stadium-layout-container">
                     <h2>Seat Plan</h2>
@@ -141,56 +142,56 @@
                 </div>
                 <div class="table-container">
                     <h2>Tickets</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Area</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% 
-                        for (SeatType type : SeatType.values()) {
-                    %>
-                    <tr>
-                        <td><%= Stadium.getSeatString(type) %></td>
-                        <td><%= Stadium.getSeatPrice(type) %></td>
-                        <td>
-                            <% if (session != null && (Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) { 
-                                if (stadium.isAreaFull(type)) { %>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Area</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                for (SeatType type : SeatType.values()) {
+                            %>
+                            <tr>
+                                <td><%= Stadium.getSeatString(type)%></td>
+                                <td><%= Stadium.getSeatPrice(type)%></td>
+                                <td>
+                                    <% if (session != null && (Boolean) session.getAttribute("isLoggedIn") != null && (Boolean) session.getAttribute("isLoggedIn")) {
+                                    if (stadium.isAreaFull(type)) { %>
                                     <button class="btn btn-secondary" disabled>Unavailable</button>
-                                <% } else { %>
+                                    <% } else {%>
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=type + "ticketModal"%>">Buy</button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="<%=type + "ticketModal"%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><%= Stadium.getSeatString(type) %></h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><%= Stadium.getSeatString(type)%></h1>
                                                     <button type="button" class="btn-close ticket-closer" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="<%= type + " ticket_table"%>">
-                                                    <% 
-                                                        Boolean[][] table = stadium.getTableFromType(type);
-                                                        for (int i = 0; i < table.length; i++) { 
-                                                    %>
-                                                    <div class="<%=type + " ticket_row"%>">
-                                                        <div class="ticket_row_count">
-                                                            <%= i + 1 %>
-                                                        </div>
-                                                        <% 
-                                                            for (int j = 0; j < table[i].length; j++) { 
+                                                        <%
+                                                            Boolean[][] table = stadium.getTableFromType(type);
+                                                            for (int i = 0; i < table.length; i++) {
                                                         %>
-                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>" data-row="<%=i%>" data-column="<%=j%>" data-seat-type="<%=type%>" data-price="<%= Stadium.getSeatPrice(type) %>">
-                                                            <span class="ticket_tooltip"><%= "Row " + (i + 1) + ", Seat " + (j + 1) %></span>
+                                                        <div class="<%=type + " ticket_row"%>">
+                                                            <div class="ticket_row_count">
+                                                                <%= i + 1%>
+                                                            </div>
+                                                            <%
+                                                                for (int j = 0; j < table[i].length; j++) {
+                                                            %>
+                                                            <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>" data-row="<%=i%>" data-column="<%=j%>" data-seat-type="<%=type%>" data-price="<%= Stadium.getSeatPrice(type)%>">
+                                                                <span class="ticket_tooltip"><%= "Row " + (i + 1) + ", Seat " + (j + 1)%></span>
+                                                            </div>
+                                                            <% } %>
                                                         </div>
-                                                        <% } %>
-                                                    </div>
-                                                    <% } %>
-                                                     <div class="<%=type + " selected-seats-list"%>"></div>
-                                                     <div class="<%=type + " selected-seats-total"%>"></div>
+                                                        <% }%>
+                                                        <div class="<%=type + " selected-seats-list"%>"></div>
+                                                        <div class="<%=type + " selected-seats-total"%>"></div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -200,15 +201,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                <% } 
-                            } else { %>
-                                <button class="btn btn-secondary" disabled>Log in to buy</button>
-                            <% } %>
-                        </td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
+                                    <% }
+                                } else { %>
+                                    <button class="btn btn-secondary" disabled>Log in to buy</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -305,22 +306,22 @@
                 function getSelectedString() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
                     return seatObjects
-                        .map((seat) => "R" + (++seat.row) + "-C" + (++seat.column))
-                        .join(", ");
+                            .map((seat) => "R" + (++seat.row) + "-C" + (++seat.column))
+                            .join(", ");
                 }
 
                 function getSelectedSum() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
                     return seatObjects.reduce((sum, seat) => sum + seat.price, 0);
                 }
-                
+
                 function getResponseStringFromTickets() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
                     return seatObjects.map((seat) => "" + (++seat.row) + "-" + (++seat.column) + "-" + seat.type)
-                        .join(", ");
-                    
+                            .join(", ");
+
                 }
-                
+
 
                 function buyTicket() {
                     const url = "/mp4-ics2608/receipt";  // Ensure this URL is correct.
@@ -332,20 +333,20 @@
                         },
                         body: getResponseStringFromTickets()  // Pass your ticket data.
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            // Redirect to receipt page or refresh if necessary.
-                            window.location.href = "/mp4-ics2608/receipt";  // Adjust the path as needed
-                        } else {
-                            console.error("Failed to send request:", response.statusText);
-                        }
-                    })
-                    .catch(error => {
-                        console.log("Error sending request:", error);
-                    });
+                            .then(response => {
+                                if (response.ok) {
+                                    // Redirect to receipt page or refresh if necessary.
+                                    window.location.href = "/mp4-ics2608/receipt";  // Adjust the path as needed
+                                } else {
+                                    console.error("Failed to send request:", response.statusText);
+                                }
+                            })
+                            .catch(error => {
+                                console.log("Error sending request:", error);
+                            });
                 }
 
-                
+
                 buyTicketButtons.forEach((btn) => {
                     btn.addEventListener("click", buyTicket);
                 })
