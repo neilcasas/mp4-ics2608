@@ -20,11 +20,25 @@
             crossorigin="anonymous"
         />
         <title>Confirmation Receipt</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            main {
+                padding: 5vh 5vw;
+                min-height: calc(100vh - 125px);
+            }
+            table {
+                min-height: 50vh;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Confirmation Receipt</h1>
+        
         <main>
+        <h1>Confirmation Receipt</h1>
         <form action="purchase" method="POST">
         <table class="table">
             <thead>

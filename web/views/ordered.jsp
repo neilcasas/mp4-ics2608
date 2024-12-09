@@ -23,6 +23,20 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            main {
+                padding: 5vh 5vw;
+                min-height: calc(100vh - 125px);
+            }
+            
+            table {
+                min-height: 50vh;
+            }
+        </style>
         <title>
             <% 
                 Boolean purchaseSuccess = (Boolean) request.getAttribute("successful-purchase");
@@ -36,8 +50,8 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Orders</h1>
         <main>
+            <h1>Orders</h1>
             <% 
                 if (purchaseSuccess != null && purchaseSuccess) { 
             %>
@@ -45,6 +59,7 @@
                     Purchase successful!
                 </div>
             <% } %>
+            <% if (orderedTickets.size() > 0) { %>
             <table class="table">
                 <thead>
                     <tr>
@@ -54,6 +69,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <% for (Ticket ticket : orderedTickets) { %>
                     <tr>
                         <td><%= Stadium.getSeatString(ticket.getSeatType()) %></td>
@@ -61,8 +77,16 @@
                         <td><%= ticket.getColumn() %></td>
                     </tr>
                     <% } %>
+                    
+
+                    
                 </tbody>
             </table>
+            <% } else { %>                
+                <div class="empty-orders" style="min-height: 30vh;"> Nothing here yet.</div>
+            <%}%>
+            <a href="/mp4-ics2608/" class="btn btn-secondary">Back to Home</a>
+            <a href="/mp4-ics2608/tickets" class="btn btn-primary">Buy Tickets</a>
         </main>
         <jsp:include page="footer.jsp" />
         <script
