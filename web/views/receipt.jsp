@@ -25,6 +25,7 @@
         <jsp:include page="navbar.jsp" />
         <h1>Confirmation Receipt</h1>
         <main>
+        <form action="purchase" method="POST">
         <table class="table">
             <thead>
                 <tr>
@@ -33,6 +34,7 @@
                     <th>Column</th>
                 </tr>
             </thead>
+
             <tbody>
                 <% for(Ticket ticket : tickets) { %>
                 <tr>
@@ -47,8 +49,9 @@
                 </tr>
             </tbody>
         </table>
-                <button class="btn btn-primary">Confirm Purchase</button>
+                <input type="submit" class="btn btn-primary" value="Confirm Purchase">
                 <button class="btn btn-danger">Cancel Purchase</button>
+        </form>
         </main>
         <jsp:include page="footer.jsp" />
         <script
