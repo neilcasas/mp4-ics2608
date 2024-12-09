@@ -56,13 +56,13 @@
             <div class="row">
                 <!-- Image Column -->
                 <div class="col-md-4 text-center">
-                    <img src="../../assets/Sendou_Suto.webp" alt="Sendou Shuto" class="img-fluid rounded player-img" />
+                    <img src="../../assets/Sendou_Shuto.webp" alt="Sendou Shuto" class="img-fluid rounded player-img" />
                 </div>
 
                 <!-- Player Information Column -->
                 <div class="col-md-8">
                     <h1>Sendou Shuto</h1>
-                    <p><strong>Age:</strong> 18/p>
+                    <p><strong>Age:</strong> 18</p>
                     <p><strong>Player Number: </strong> 11</p>
                     <p><strong>Position:</strong> Offensive Midfielder</p>
                     <p>

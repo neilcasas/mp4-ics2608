@@ -3,7 +3,7 @@
 <% Stadium stadium = (Stadium) application.getAttribute("stadium"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
+<% 
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
     response.setHeader("Pragma", "no-cache"); 
     response.setDateHeader("Expires", 0);   
@@ -80,6 +80,15 @@
                 margin-right: 10px;
             }
             
+            .ticket_cell.available.selected {
+                background-color: yellow;
+                border: 2px solid grey;
+            }
+            
+            .hide {
+                display: none;
+            }
+            
         </style>
     </head>
     <body>
@@ -113,9 +122,8 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel"><%= Stadium.getSeatString(type) %></h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close ticket-closer" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <form action="purchase" method="get">
                                                 <div class="modal-body">
                                                     <div class="<%= type + " ticket_table"%>">
                                                     <% 
@@ -129,22 +137,20 @@
                                                         <% 
                                                             for (int j = 0; j < table[i].length; j++) { 
                                                         %>
-                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>">
+                                                        <div class="<%=type + " ticket_cell" + (table[i][j] ? " taken" : " available")%>" data-row="<%=i%>" data-column="<%=j%>" data-seat-type="<%=type%>" data-price="<%= Stadium.getSeatPrice(type) %>">
                                                             <span class="ticket_tooltip"><%= "Row " + (i + 1) + ", Seat " + (j + 1) %></span>
-                                                            <input type="hidden" name="row" value="<%=i%>">
-                                                            <input type="hidden" name="column" value="<%=j%>">
-                                                            <input type="hidden" name="seat_type" value="<%=type%>">
                                                         </div>
                                                         <% } %>
                                                     </div>
                                                     <% } %>
+                                                     <div class="<%=type + " selected-seats-list"%>"></div>
+                                                     <div class="<%=type + " selected-seats-total"%>"></div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                                    <input type="submit" class="btn btn-primary" value="Purchase">
+                                                    <button type="button" class="btn btn-danger ticket-closer" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-primary buy-ticket-btn">Purchase</button>
                                                 </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -164,5 +170,139 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let availableSeats = document.querySelectorAll(".ticket_cell.available");
+                const selectedSeats = new Set();
+                const selectedSum = document.querySelectorAll(".selected-seats-total");
+                const selectedSeatsList = document.querySelectorAll(".selected-seats-list");
+                const ticketClosers = document.querySelectorAll(".ticket-closer");
+                const buyTicketButtons = document.querySelectorAll(".buy-ticket-btn");
+
+                availableSeats.forEach((seat) => {
+                    seat.addEventListener("click", () => {
+                        // Get data from seat DOM element
+                        const seatRow = seat.dataset.row;
+                        const seatColumn = seat.dataset.column;
+                        const seatType = seat.dataset.seatType;
+                        const seatPrice = Number(seat.dataset.price);
+                        const seatObject = JSON.stringify({
+                            row: seatRow,
+                            column: seatColumn,
+                            type: seatType,
+                            price: seatPrice
+                        });
+
+                        // If selected again, remove from selected seats
+                        if (selectedSeats.has(seatObject)) {
+                            selectedSeats.delete(seatObject);
+                        } else {
+                            selectedSeats.add(seatObject);
+                        }
+
+                        seat.classList.toggle("selected");
+
+                        // Update selected seats and sum
+                        selectedSeatsList.forEach((list) => {
+                            list.innerHTML = "Selected seats: " + getSelectedString();
+                        });
+
+                        selectedSum.forEach((sum) => {
+                            sum.innerHTML = "Total: " + getSelectedSum();
+                        });
+
+                        // Conditionally show selected seat list and sum
+                        if (selectedSeats.size === 0) {
+                            selectedSeatsList.forEach((list) => {
+                                list.classList.add("hide");
+                            });
+
+                            selectedSum.forEach((sum) => {
+                                sum.classList.add("hide");
+                            });
+                        } else {
+                            selectedSeatsList.forEach((list) => {
+                                list.classList.remove("hide");
+                            });
+                            selectedSum.forEach((sum) => {
+                                sum.classList.remove("hide");
+                            });
+                        }
+
+                        console.log(selectedSeats);
+                    });
+                });
+
+                // Clear ticket set when closing modal
+                ticketClosers.forEach((closer) => {
+                    closer.addEventListener("click", () => {
+                        selectedSeats.clear();
+                        console.log(selectedSeats);
+
+                        availableSeats.forEach((seat) => {
+                            seat.classList.remove("selected");
+                        });
+
+                        selectedSeatsList.forEach((list) => {
+                            list.classList.add("hide");
+                            list.innerHTML = "";
+                        });
+                        selectedSum.forEach((sum) => {
+                            sum.classList.add("hide");
+                            sum.innerHTML = "";
+                        });
+                    });
+                });
+
+                function getSelectedString() {
+                    const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
+                    return seatObjects
+                        .map((seat) => "R" + (++seat.row) + "-C" + (++seat.column))
+                        .join(", ");
+                }
+
+                function getSelectedSum() {
+                    const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
+                    return seatObjects.reduce((sum, seat) => sum + seat.price, 0);
+                }
+                
+                function getResponseStringFromTickets() {
+                    const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
+                    return seatObjects.map((seat) => "" + (++seat.row) + "-" + (++seat.column) + "-" + seat.type)
+                        .join(", ");
+                    
+                }
+                
+
+                function buyTicket() {
+                    const url = "/mp4-ics2608/receipt";  // Ensure this URL is correct.
+
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: getResponseStringFromTickets()  // Pass your ticket data.
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Redirect to receipt page or refresh if necessary.
+                            window.location.href = "/mp4-ics2608/receipt";  // Adjust the path as needed
+                        } else {
+                            console.error("Failed to send request:", response.statusText);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Error sending request:", error);
+                    });
+                }
+
+                
+                buyTicketButtons.forEach((btn) => {
+                    btn.addEventListener("click", buyTicket);
+                })
+            });
+
+        </script>
     </body>
 </html>
