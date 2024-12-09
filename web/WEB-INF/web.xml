@@ -65,5 +65,7 @@
     </context-param>
     <welcome-file-list>
         <welcome-file>views/guest.jsp</welcome-file>
+        <welcome-file>views/guest_backup.jsp</welcome-file>
+        <welcome-file>views/index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

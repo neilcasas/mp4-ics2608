@@ -31,6 +31,8 @@
             .ticket_table {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
             .ticket_row {
                 display: flex;
@@ -119,7 +121,11 @@
                 width: 100%;
                 flex-direction:column;
             }
-
+            .selected-seats-list {
+                max-width: 300px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
             @media screen and (max-width: 992px) {
                 .main-content {
                     flex-direction: column-reverse;
@@ -312,7 +318,8 @@
 
                 function getSelectedSum() {
                     const seatObjects = Array.from(selectedSeats).map((seat) => JSON.parse(seat));
-                    return seatObjects.reduce((sum, seat) => sum + seat.price, 0);
+                    sum = seatObjects.reduce((sum, seat) => sum + seat.price, 0);
+                    return "$" + sum;
                 }
 
                 function getResponseStringFromTickets() {

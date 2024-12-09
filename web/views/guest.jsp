@@ -87,7 +87,7 @@
             <header class="banner">
                 <div class="content text-center">
                     <h1 class="display-4">Blue Lock Eleven VS Japan's U-20</h1>
-                    <p class="lead">Watch the greatest foo</p>
+                    <p class="lead">Watch the greatest match in the history of Japan Youth Football!</p>
                     <a href="tickets" class="btn btn-primary">Buy Tickets</a>
                 </div>
             </header>
