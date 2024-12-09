@@ -20,6 +20,14 @@
             crossorigin="anonymous"
         />
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            main {
+                padding: 5vh 5vw;
+                min-height: calc(100vh - 125px);
+            }
             .ticket_table {
                 display: flex;
                 flex-direction: column;
@@ -89,12 +97,50 @@
                 display: none;
             }
             
+            .main-content {
+                display: flex;
+                gap: 30px;
+            }
+            .stadium-layout-container {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            .stadium-layout-img-container {
+                height: 400px;
+            }
+            .stadium-layout-img-container img {
+                height: 100%;
+                border-radius: 20px;
+            }
+            .table-container {
+                display: flex;
+                flex: 1;
+                width: 100%;
+                flex-direction:column;
+            }
+            
+            @media screen and (max-width: 992px) {
+                .main-content {
+                    flex-direction: column-reverse;
+                }
+                
+            }
         </style>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <main>
-            <h1>Tickets</h1>
+            
+            <div class="main-content">
+                <div class="stadium-layout-container">
+                    <h2>Seat Plan</h2>
+                    <div class="stadium-layout-img-container">
+                        <img src="/mp4-ics2608/assets/stadium_layout.webp" alt="blue lock stadium layout"/>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <h2>Tickets</h2>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -163,6 +209,8 @@
                     <% } %>
                 </tbody>
             </table>
+                </div>
+            </div>
         </main>
         <jsp:include page="footer.jsp" />
         <script
